@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --btn-normal: #277B6B;
+  --btn-hover: #CE8A22;
+  --btn-text: #fff;
+  --question-text: #1B5348;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  background-color: var(--btn-normal);
+  color: var(--btn-text);
+  border-radius: 5px;
+  font-size: larger;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+.header {
+  /* hide element when showing High Scores rankings */
+}
+
+.timer {
+  font-weight: bold;
+}
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 65%;
+}
