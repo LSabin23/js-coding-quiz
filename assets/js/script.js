@@ -1,4 +1,6 @@
 var startButtonEl = document.querySelector('#start-btn')
+var headerEl = document.querySelector('#header')
+var timerEl = document.querySelector('#timer')
 
 // add array of question objects with title and answer properties
 var quizArray = [
@@ -40,10 +42,33 @@ var quizArray = [
 ]
 
 var startQuiz = function () {
-  console.log('test')
-  // start timer from 75 seconds and countdown by 1000ms
+  // display timer value to #timer element
+  countdownTimer()
 
-  // show first array item when start quiz is clicked
+  // call fxn to show quiz questions
+  askQuestion()
+}
+
+var countdownTimer = function () {
+  // start timer from 75 seconds and countdown by 1000ms
+  var timeLeft = 75
+
+  var timeInterval = setInterval(function () {
+    if (timeLeft < 0) {
+      clearInterval(timeInterval)
+      console.log('Game Over.')
+      // call a function to show the score submission element
+    }
+    else {
+      // display timer value to timerEl.textContent
+      timerEl.textContent = 'Timer: ' + timeLeft
+      timeLeft = timeLeft - 1
+    }
+  }, 1000)
+}
+
+var askQuestion = function () {
+  // set .container child div to first array object content
 }
 
 // add event listener for click on Start Quiz button
