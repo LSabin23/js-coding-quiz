@@ -21,6 +21,28 @@
         <p>Test your knowledge on JavaScript fundamentals! Click Start Quiz below to initiate the timer. Keep in mind incorrect answers will deduct time from the clock!</p>
         <button id="start-btn">Start Quiz</button>
       </div>
+      <!-- add div for question element and set to hide by default -->
+      <div id="questions" class="hidden">
+        <!-- dynamically create quiz header and questions -->
+        <h2>Question XYZ</h2>
+      </div>
+      <!-- add div for submission element and set to hide by default -->
+      <div id="submit-score" class="hidden">
+        <h2>All done!</h2>
+        <p>Your final score is </p>
+        <form>
+          <label for="initials">Enter initials: </label>
+          <input type="text" id="initials" name="initials">
+          <input id="btn-submit" type="submit" value="Submit">
+        </form>
+      </div>
+      <!-- add div for score display element and set to hide by default -->
+      <div id="high-scores" class="hidden">
+        <h2>High Scores</h2>
+        <!-- use JS to display input element as p element -->
+        <button id="restart" type="submit">Go Back</button>
+        <button id="clear-stored-scores" type="submit">Clear High Scores</button>
+      </div>
     </div>
   </main>
 
