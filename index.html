@@ -22,9 +22,9 @@
         <button id="start-btn">Start Quiz</button>
       </div>
       <!-- add div for question element and set to hide by default -->
-      <div id="questions" class="hidden">
+      <div id="questions" class="hidden flex">
         <!-- dynamically create quiz header and questions -->
-        <h2>Question XYZ</h2>
+        <!-- <h2>Question XYZ</h2> -->
       </div>
       <!-- add div for submission element and set to hide by default -->
       <div id="submit-score" class="hidden">
@@ -33,15 +33,15 @@
         <form>
           <label for="initials">Enter initials: </label>
           <input type="text" id="initials" name="initials">
-          <input id="btn-submit" type="submit" value="Submit">
+          <button id="save-scores-btn" type="button">Submit</button>
         </form>
       </div>
       <!-- add div for score display element and set to hide by default -->
       <div id="high-scores" class="hidden">
         <h2>High Scores</h2>
         <!-- use JS to display input element as p element -->
-        <button id="restart" type="submit">Go Back</button>
-        <button id="clear-stored-scores" type="submit">Clear High Scores</button>
+        <button id="restart-btn" type="button">Go Back</button>
+        <button id="clear-stored-scores" type="button">Clear High Scores</button>
       </div>
     </div>
   </main>
