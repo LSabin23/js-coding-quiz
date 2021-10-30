@@ -55,7 +55,7 @@ var startQuiz = function () {
   introEl.classList.toggle('hidden')
   // set questions div display to shown
   questionEl.classList.toggle('hidden')
-  
+
   // display timer value to #timer element
   countdownTimer()
 
@@ -71,12 +71,6 @@ var countdownTimer = function () {
       // call a function to show the score submission element instead of ask question
       submitScore()
     }
-    // add condition to check if answer button clicked property name is not rightAnswer then subtract 10 from timeLeft
-    // else if (CLICKED BUTTON ID IS NOT CORRECT-ANSWER) {
-      // timeLeft = timeLeft - 10
-      // questionCounter = questionCounter + 1
-      // askQuestion()
-    // }
     else {
       // display timer value to timerEl.textContent
       timerEl.textContent = 'Timer: ' + timeLeft
@@ -100,13 +94,10 @@ var submitScore = function () {
 }
 
 var askQuestion = function () {
-  // set question div to first array object content
-  // create new h2 element for question text
   var questionTextEl = document.createElement('h2')
-  // set question text to index object's title property content
   questionTextEl.textContent = quizArray[questionCounter].title
-  // append question text element to question el container for visibility
   questionEl.appendChild(questionTextEl)
+
   // create button element for each answer property on index object
   var answerChoice1 = document.createElement('button')
   answerChoice1.textContent = quizArray[questionCounter].answer1
@@ -125,6 +116,10 @@ var askQuestion = function () {
   answerChoice4.textContent = quizArray[questionCounter].answer4
   questionEl.appendChild(answerChoice4)
 
+  checkAnswer()
+}
+
+var checkAnswer = function () {
   // add event listener for click on a button with id correct-answer
   questionEl.addEventListener('click', function (event) {
     if (event.target.id !== 'correct-answer') {
