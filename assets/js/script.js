@@ -14,7 +14,7 @@ var validityEl = document.querySelector('#answer-validity')
 
 var questionCounter = 0
 // set timeLeft to 75 if not testing
-var timeLeft = 30
+var timeLeft = 75
 
 // add array of question objects with title and answer properties
 var quizArray = [
@@ -27,31 +27,31 @@ var quizArray = [
   },
   {
     title: 'What is a callback function?',
-    answer1: '1. Function that shows a prompt for a user to leave a voicemail message for a developer.',
-    answer2: '2. Function that immediately displays Carly Rae Jepsen\'s Call Me Maybe video.',
+    answer1: '1. Function that let\'s a user leave a voicemail message for a developer.',
+    answer2: '2. Function that displays Carly Rae Jepsen\'s Call Me Maybe video.',
     answerRight: '3. Function that\'s passed into another function as a parameter.',
-    answer4: '4. Answer 4'
+    answer4: '4. Function that calls the last person that used this computer.'
   },
   {
-    title: 'Question 3',
-    answer1: '1. Answer 1',
-    answer2: '2. Answer 2',
-    answerRight: '3. Answer 3',
-    answer4: '4. Answer 4'
+    title: 'Which of the following is a JavaScript event?',
+    answer1: '1. Mousetrap',
+    answer2: '2. Mouseunder',
+    answerRight: '3. Mouseover',
+    answer4: '4. Ratatouille'
   },
   {
-    title: 'Question 4',
-    answer1: '1. Answer 1',
-    answer2: '2. Answer 2',
-    answerRight: '3. Answer 3',
-    answer4: '4. Answer 4'
+    title: 'Which keyword refers to the object it belongs to?',
+    answer1: '1. thingamajig',
+    answer2: '2. that',
+    answerRight: '3. this',
+    answer4: '4. the other thing'
   },
   {
-    title: 'Question 5',
-    answer1: '1. Answer 1',
-    answer2: '2. Answer 2',
-    answerRight: '3. Answer 3',
-    answer4: '4. Answer 4'
+    title: 'Which of the following methods constructs the JavaScript object or value described by the string it\'s used on?',
+    answer1: '1. JSON.parts()',
+    answer2: '2. JASON.parse()',
+    answerRight: '3. JSON.parse()',
+    answer4: '4. Begging'
   }
 ]
 
@@ -172,7 +172,8 @@ var showScores = function () {
   highScoresEl.classList.toggle('hidden')
   // get initials and score from localstorage and display
   var scoreItemEl = document.createElement('li')
-  scoreItemEl.textContent = JSON.parse(localStorage.getItem('highscore'))
+  var highscore = JSON.parse(localStorage.getItem('highscore'))
+  scoreItemEl.textContent = highscore.initials + ' ' + highscore.score
   scoresListEl.appendChild(scoreItemEl)
 }
 
