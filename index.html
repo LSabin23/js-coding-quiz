@@ -28,7 +28,7 @@
       <!-- add div for submission element and set to hide by default -->
       <div id="submit-score" class="hidden">
         <h2>All done!</h2>
-        <p>Your final score is </p>
+        <p id="final-score">Your final score is </p>
         <form>
           <label for="initials">Enter initials: </label>
           <input type="text" id="initials" name="initials">
@@ -38,7 +38,7 @@
       <!-- add div for score display element and set to hide by default -->
       <div id="high-scores" class="hidden">
         <h2>High Scores</h2>
-        <!-- use JS to display input element as p element -->
+        <p id="scores-list"></p>
         <button id="restart-btn" type="button">Go Back</button>
         <button id="clear-stored-scores" type="button">Clear High Scores</button>
       </div>

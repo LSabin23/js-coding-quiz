@@ -7,6 +7,10 @@ var submitFormEl = document.querySelector('#submit-score')
 var restartButtonEl = document.querySelector('#restart-btn')
 var saveScoresButtonEl = document.querySelector('#save-scores-btn')
 var highScoresEl = document.querySelector('#high-scores')
+var formInitialsEl = document.querySelector('#initials')
+var finalScoreEl = document.querySelector('#final-score')
+var scoresListEl = document.querySelector('#scores-list')
+
 var questionCounter = 0
 // set timeLeft to 75 if not testing
 var timeLeft = 15
@@ -66,10 +70,10 @@ var startQuiz = function () {
 var countdownTimer = function () {
   // start timer from 75 seconds and countdown by 1000ms
   var timeInterval = setInterval(function () {
-    if (timeLeft < 0) {
-      clearInterval(timeInterval)
+    if (timeLeft <= 0 || questionCounter > quizArray.length) {
       // call a function to show the score submission element instead of ask question
       submitScore()
+      clearInterval(timeInterval)
     }
     else {
       // display timer value to timerEl.textContent
@@ -86,19 +90,26 @@ var submitScore = function () {
 
   // set display of submission container to block to show it
   submitFormEl.classList.toggle('hidden')
+  finalScoreEl.textContent = 'Your final score is ' + timeLeft
 
   // set display of headerEl to none to hide it
   headerEl.classList.toggle('hidden')
 
-  // call a saveScore function to save score input to localStorage
+  // save score input to localStorage
+  var highscore = {
+    initials: formInitialsEl.textContent.trim(),
+    score: timeLeft
+  }
+
+  localStorage.setItem('highscore', (JSON.stringify(highscore)))
 }
 
 var askQuestion = function () {
+  questionEl.innerHTML = ''
   var questionTextEl = document.createElement('h2')
   questionTextEl.textContent = quizArray[questionCounter].title
   questionEl.appendChild(questionTextEl)
 
-  // create button element for each answer property on index object
   var answerChoice1 = document.createElement('button')
   answerChoice1.textContent = quizArray[questionCounter].answer1
   questionEl.appendChild(answerChoice1)
@@ -121,14 +132,16 @@ var askQuestion = function () {
 
 var checkAnswer = function () {
   // add event listener for click on a button with id correct-answer
-  questionEl.addEventListener('click', function (event) {
+  questionEl.addEventListener('click', function listener (event) {
     if (event.target.id !== 'correct-answer') {
+      questionEl.removeEventListener('click', listener)
       // subtract 10 seconds from timer
       timeLeft = timeLeft - 10
       questionCounter = questionCounter + 1
       askQuestion()
     }
-    else {
+    else if (event.target.id === 'correct-answer') {
+      questionEl.removeEventListener('click', listener)
       questionCounter = questionCounter + 1
       askQuestion()
     }
@@ -144,6 +157,8 @@ var showScores = function () {
   submitFormEl.classList.toggle('hidden')
   // set high scores container display to show it
   highScoresEl.classList.toggle('hidden')
+  // get initials and score from localstorage and display
+  scoresListEl.innerHTML = localStorage.getItem(JSON.parse('highscore'))
 }
 
 // add event listener for click on Start Quiz button to call startQuiz function
