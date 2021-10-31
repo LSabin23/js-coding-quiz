@@ -14,22 +14,22 @@ var validityEl = document.querySelector('#answer-validity')
 
 var questionCounter = 0
 // set timeLeft to 75 if not testing
-var timeLeft = 15
+var timeLeft = 30
 
 // add array of question objects with title and answer properties
 var quizArray = [
   {
-    title: 'Question 1',
-    answer1: '1. Answer 1',
-    answer2: '2. Answer 2',
-    answerRight: '3. Answer 3',
-    answer4: '4. Answer 4'
+    title: 'What is the isNaN function?',
+    answer1: '1. Determines if the user is a grandmother.',
+    answer2: '2. Identifies cool people as Not A Noob.',
+    answerRight: '3. Determines if a value is a valid number.',
+    answer4: '4. Declares if an object is a type of bread.'
   },
   {
-    title: 'Question 2',
-    answer1: '1. Answer 1',
-    answer2: '2. Answer 2',
-    answerRight: '3. Answer 3',
+    title: 'What is a callback function?',
+    answer1: '1. Function that shows a prompt for a user to leave a voicemail message for a developer.',
+    answer2: '2. Function that immediately displays Carly Rae Jepsen\'s Call Me Maybe video.',
+    answerRight: '3. Function that\'s passed into another function as a parameter.',
     answer4: '4. Answer 4'
   },
   {
@@ -93,6 +93,9 @@ var submitScore = function () {
 
   // set display of submission container to block to show it
   submitFormEl.classList.toggle('hidden')
+  if (timeLeft < 0) {
+    timeLeft = 0
+  }
   finalScoreEl.textContent = 'Your final score is ' + timeLeft
 
   // set display of headerEl to none to hide it
@@ -100,8 +103,6 @@ var submitScore = function () {
 
   // set display of answer validation element to hidden
   validityEl.classList.toggle('hidden')
-
-  saveHighscore()
 }
 
 var saveHighscore = function () {
@@ -164,12 +165,15 @@ var reloadPage = function () {
 }
 
 var showScores = function () {
+  saveHighscore()
   // set submission container display to hidden to hide it
   submitFormEl.classList.toggle('hidden')
   // set high scores container display to show it
   highScoresEl.classList.toggle('hidden')
   // get initials and score from localstorage and display
-  scoresListEl.value = JSON.parse(localStorage.getItem('highscore'))
+  var scoreItemEl = document.createElement('li')
+  scoreItemEl.textContent = JSON.parse(localStorage.getItem('highscore'))
+  scoresListEl.appendChild(scoreItemEl)
 }
 
 // add event listener for click on Start Quiz button to call startQuiz function
