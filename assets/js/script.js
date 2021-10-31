@@ -10,6 +10,7 @@ var highScoresEl = document.querySelector('#high-scores')
 var formInitialsEl = document.querySelector('#initials')
 var finalScoreEl = document.querySelector('#final-score')
 var scoresListEl = document.querySelector('#scores-list')
+var validityEl = document.querySelector('#answer-validity')
 
 var questionCounter = 0
 // set timeLeft to 75 if not testing
@@ -59,6 +60,8 @@ var startQuiz = function () {
   introEl.classList.toggle('hidden')
   // set questions div display to shown
   questionEl.classList.toggle('hidden')
+  // set answer validitation div to shown
+  validityEl.classList.toggle('hidden')
 
   // display timer value to #timer element
   countdownTimer()
@@ -70,7 +73,7 @@ var startQuiz = function () {
 var countdownTimer = function () {
   // start timer from 75 seconds and countdown by 1000ms
   var timeInterval = setInterval(function () {
-    if (timeLeft <= 0 || questionCounter > quizArray.length) {
+    if (timeLeft <= 0 || questionCounter >= quizArray.length) {
       // call a function to show the score submission element instead of ask question
       submitScore()
       clearInterval(timeInterval)
@@ -95,9 +98,16 @@ var submitScore = function () {
   // set display of headerEl to none to hide it
   headerEl.classList.toggle('hidden')
 
+  // set display of answer validation element to hidden
+  validityEl.classList.toggle('hidden')
+
+  saveHighscore()
+}
+
+var saveHighscore = function () {
   // save score input to localStorage
   var highscore = {
-    initials: formInitialsEl.textContent.trim(),
+    initials: formInitialsEl.value,
     score: timeLeft
   }
 
@@ -135,13 +145,14 @@ var checkAnswer = function () {
   questionEl.addEventListener('click', function listener (event) {
     if (event.target.id !== 'correct-answer') {
       questionEl.removeEventListener('click', listener)
-      // subtract 10 seconds from timer
+      validityEl.innerHTML = '<h3>Incorrect.</h3>'
       timeLeft = timeLeft - 10
       questionCounter = questionCounter + 1
       askQuestion()
     }
     else if (event.target.id === 'correct-answer') {
       questionEl.removeEventListener('click', listener)
+      validityEl.innerHTML = '<h3>Correct!</h3>'
       questionCounter = questionCounter + 1
       askQuestion()
     }
@@ -158,7 +169,7 @@ var showScores = function () {
   // set high scores container display to show it
   highScoresEl.classList.toggle('hidden')
   // get initials and score from localstorage and display
-  scoresListEl.innerHTML = localStorage.getItem(JSON.parse('highscore'))
+  scoresListEl.value = JSON.parse(localStorage.getItem('highscore'))
 }
 
 // add event listener for click on Start Quiz button to call startQuiz function
