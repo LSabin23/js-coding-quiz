@@ -9,7 +9,7 @@ _Page Sample Screenshot:_
 
 ### Access
 
-Access the live site [here!](https://lsabin23.github.io.js-coding-quiz/)
+Access the live site [here!](https://lsabin23.github.io/js-coding-quiz/)
 
 ### Future Enhancements Roadmap
 
